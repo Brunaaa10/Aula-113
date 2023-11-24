@@ -1,6 +1,7 @@
 import os
 import shutil
 import time
+import random
 
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
@@ -36,9 +37,12 @@ class FileMovementHandler(FileSystemEventHandler):
                         newfilename = os.path.splitext(file_name)[0] + str(random.randint(0,99)) + os.path.splitext(file_name)[1]
                         path4 = to_dir + "/" + key + "/" + newfilename
                         print(f"movendo {newfilename}")
+                        shutil.move(path1, path4)
+                        time.sleep(1)
                     else:
                         print(f"movendo {file_name}")
                         shutil.move(path1,path3)
+                        time.sleep(1)
                 else:
                     os.makedirs(path2)
                     print(f"movendo {file_name}")
@@ -63,6 +67,6 @@ try:
         time.sleep(2)
         print("Executando...")
 except KeyboardInterrupt:
-    print ("interronpido")
+    print ("interrompido")
     observer.stop()
 
